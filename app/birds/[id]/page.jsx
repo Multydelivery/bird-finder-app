@@ -4,6 +4,9 @@ import { use, useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import { useFavorites } from "@/lib/useFavorites";
 
+// Force dynamic rendering since this page uses localStorage and dynamic params
+export const dynamic = 'force-dynamic';
+
 export default function BirdDetailPage({ params }) {
   // Unwrap the async params
   const resolvedParams = use(params);

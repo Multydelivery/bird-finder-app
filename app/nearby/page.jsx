@@ -4,6 +4,9 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 
+// Force dynamic rendering since this page uses URL search params
+export const dynamic = 'force-dynamic';
+
 export default function NearbyPage() {
   const searchParams = useSearchParams();
   const lat = searchParams.get("lat");

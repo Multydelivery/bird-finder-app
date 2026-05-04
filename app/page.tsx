@@ -6,6 +6,9 @@ import FindNearbyButton from "@/components/FindNearbyButton";
 import SearchBar from "@/components/SearchBar";
 import BirdCard from "@/components/BirdCard";
 
+// Force dynamic rendering since this page uses navigator.geolocation and localStorage
+export const dynamic = 'force-dynamic';
+
 interface Bird {
   id: string;
   name: string;

@@ -5,6 +5,9 @@ import BirdCard from "@/components/BirdCard";
 import { useFavorites } from "@/lib/useFavorites";
 import Link from "next/link";
 
+// Force dynamic rendering since this page uses localStorage
+export const dynamic = 'force-dynamic';
+
 export default function FavoritesPage() {
   const { favorites } = useFavorites();
   const [favoriteBirds, setFavoriteBirds] = useState([]);
