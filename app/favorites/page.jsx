@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useMemo, useState } from "react";
 import BirdCard from "@/components/BirdCard";
 import { useFavorites } from "@/lib/useFavorites";
 import Link from "next/link";
@@ -8,38 +8,29 @@ import Link from "next/link";
 // Force dynamic rendering since this page uses localStorage
 export const dynamic = 'force-dynamic';
 
+function readCachedBirds() {
+  if (typeof window === "undefined") {
+    return [];
+  }
+
+  try {
+    const cachedBirds = localStorage.getItem("cachedBirdData");
+    const parsedBirds = cachedBirds ? JSON.parse(cachedBirds) : [];
+
+    return Array.isArray(parsedBirds) ? parsedBirds : [];
+  } catch (error) {
+    console.error("Error loading cached birds:", error);
+    return [];
+  }
+}
+
 export default function FavoritesPage() {
   const { favorites } = useFavorites();
-  const [favoriteBirds, setFavoriteBirds] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    // Load favorite birds from localStorage cache
-    const cachedBirds = localStorage.getItem("cachedBirdData");
-    
-    if (cachedBirds && favorites.length > 0) {
-      try {
-        const allBirds = JSON.parse(cachedBirds);
-        const filteredFavorites = allBirds.filter((bird) => favorites.includes(bird.id));
-        setFavoriteBirds(filteredFavorites);
-      } catch (error) {
-        console.error("Error loading cached birds:", error);
-      }
-    }
-    
-    setLoading(false);
-  }, [favorites]);
-
-  if (loading) {
-    return (
-      <main className="min-h-screen bg-white px-6 py-10">
-        <div className="text-center py-20">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-green-700"></div>
-          <p className="mt-4 text-gray-600">Loading favorites...</p>
-        </div>
-      </main>
-    );
-  }
+  const [cachedBirds] = useState(readCachedBirds);
+  const favoriteBirds = useMemo(
+    () => cachedBirds.filter((bird) => favorites.includes(bird.id)),
+    [cachedBirds, favorites]
+  );
 
   return (
     <main className="min-h-screen bg-white px-6 py-10">

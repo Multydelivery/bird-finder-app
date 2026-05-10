@@ -90,7 +90,7 @@ async function fetchMacaulayMedia(speciesCode, commonName) {
 /**
  * Fallback bird images from Unsplash
  */
-function getFallbackImage(speciesCode, commonName) {
+function getFallbackImage(speciesCode) {
   const fallbackImages = [
     "https://images.unsplash.com/photo-1444464666168-49d633b86797",
     "https://images.unsplash.com/photo-1552728089-57bdde30beb3",
@@ -113,15 +113,48 @@ function getFallbackImage(speciesCode, commonName) {
 export async function GET(request) {
   try {
     const { searchParams } = new URL(request.url);
-    const lat = searchParams.get("lat");
-    const lng = searchParams.get("lng");
-    const dist = searchParams.get("dist") || "25"; // Default 25km radius
-    const maxResults = searchParams.get("maxResults") || "50";
+    const latParam = searchParams.get("lat");
+    const lngParam = searchParams.get("lng");
+    const distParam = searchParams.get("dist") || "25"; // Default 25km radius
+    const maxResultsParam = searchParams.get("maxResults") || "50";
 
     // Validate coordinates
-    if (!lat || !lng) {
+    if (!latParam || !lngParam) {
       return NextResponse.json(
         { error: "Latitude and longitude are required" },
+        { status: 400 }
+      );
+    }
+
+    const lat = Number(latParam);
+    const lng = Number(lngParam);
+    const dist = Number(distParam);
+    const maxResults = Number(maxResultsParam);
+
+    if (
+      !Number.isFinite(lat) ||
+      !Number.isFinite(lng) ||
+      lat < -90 ||
+      lat > 90 ||
+      lng < -180 ||
+      lng > 180
+    ) {
+      return NextResponse.json(
+        { error: "Latitude must be between -90 and 90, and longitude must be between -180 and 180" },
+        { status: 400 }
+      );
+    }
+
+    if (!Number.isFinite(dist) || dist < 0 || dist > 50) {
+      return NextResponse.json(
+        { error: "Distance must be a number between 0 and 50 kilometers" },
+        { status: 400 }
+      );
+    }
+
+    if (!Number.isInteger(maxResults) || maxResults < 1 || maxResults > 10000) {
+      return NextResponse.json(
+        { error: "maxResults must be an integer between 1 and 10000" },
         { status: 400 }
       );
     }
@@ -166,7 +199,7 @@ export async function GET(request) {
         const { image, audio } = await fetchMacaulayMedia(obs.speciesCode, obs.comName);
         
         // Use fallback image if Macaulay didn't return one
-        const finalImage = image || getFallbackImage(obs.speciesCode, obs.comName);
+        const finalImage = image || getFallbackImage(obs.speciesCode);
         
         return {
           id: obs.speciesCode,

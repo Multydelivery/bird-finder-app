@@ -1,43 +1,43 @@
 "use client";
 
-import { use, useEffect, useState, useRef } from "react";
+import { use, useState, useRef } from "react";
 import Link from "next/link";
 import { useFavorites } from "@/lib/useFavorites";
+import { birds as staticBirds } from "@/lib/birdsData";
 
 // Force dynamic rendering since this page uses localStorage and dynamic params
 export const dynamic = 'force-dynamic';
 
+function readBirdFromCache(birdId) {
+  if (!birdId) {
+    return null;
+  }
+
+  if (typeof window === "undefined") {
+    return staticBirds.find((bird) => bird.id === birdId) || null;
+  }
+
+  try {
+    const cachedBirds = localStorage.getItem("cachedBirdData");
+    const parsedBirds = cachedBirds ? JSON.parse(cachedBirds) : [];
+    const cachedBird = Array.isArray(parsedBirds)
+      ? parsedBirds.find((bird) => bird.id === birdId)
+      : null;
+
+    return cachedBird || staticBirds.find((bird) => bird.id === birdId) || null;
+  } catch (error) {
+    console.error("Error loading bird data:", error);
+    return staticBirds.find((bird) => bird.id === birdId) || null;
+  }
+}
+
 export default function BirdDetailPage({ params }) {
   // Unwrap the async params
   const resolvedParams = use(params);
-  const [bird, setBird] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [bird] = useState(() => readBirdFromCache(resolvedParams?.id));
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);
   const { isFavorite, toggleFavorite } = useFavorites();
-
-  useEffect(() => {
-    // Ensure params.id exists
-    if (!resolvedParams?.id) {
-      setLoading(false);
-      return;
-    }
-
-    // Load bird data from localStorage cache
-    const cachedBirds = localStorage.getItem("cachedBirdData");
-    
-    if (cachedBirds) {
-      try {
-        const allBirds = JSON.parse(cachedBirds);
-        const foundBird = allBirds.find((b) => b.id === resolvedParams.id);
-        setBird(foundBird || null);
-      } catch (error) {
-        console.error("Error loading bird data:", error);
-      }
-    }
-    
-    setLoading(false);
-  }, [resolvedParams?.id]);
 
   const handlePlayAudio = () => {
     if (!audioRef.current) return;
@@ -59,19 +59,6 @@ export default function BirdDetailPage({ params }) {
       setIsPlaying(false);
     }
   };
-
-  if (loading) {
-    return (
-      <main className="min-h-screen bg-white px-6 py-10">
-        <div className="mx-auto max-w-5xl">
-          <div className="text-center py-20">
-            <div className="inline-block animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-green-700"></div>
-            <p className="mt-4 text-gray-600">Loading bird details...</p>
-          </div>
-        </div>
-      </main>
-    );
-  }
 
   if (!bird) {
     return (

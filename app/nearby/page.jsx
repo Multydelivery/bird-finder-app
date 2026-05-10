@@ -1,25 +1,26 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 
 // Force dynamic rendering since this page uses URL search params
 export const dynamic = 'force-dynamic';
 
-export default function NearbyPage() {
+function NearbyContent() {
   const searchParams = useSearchParams();
   const lat = searchParams.get("lat");
   const lng = searchParams.get("lng");
+  const hasCoordinates = Boolean(lat && lng);
 
   const [birds, setBirds] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(hasCoordinates);
+  const [error, setError] = useState(
+    hasCoordinates ? null : "Location coordinates not provided"
+  );
 
   useEffect(() => {
-    if (!lat || !lng) {
-      setError("Location coordinates not provided");
-      setLoading(false);
+    if (!hasCoordinates) {
       return;
     }
 
@@ -44,7 +45,7 @@ export default function NearbyPage() {
     }
 
     fetchNearbyBirds();
-  }, [lat, lng]);
+  }, [hasCoordinates, lat, lng]);
 
   if (loading) {
     return (
@@ -141,5 +142,24 @@ export default function NearbyPage() {
         )}
       </div>
     </main>
+  );
+}
+
+export default function NearbyPage() {
+  return (
+    <Suspense fallback={
+      <main className="min-h-screen bg-white px-6 py-10">
+        <div className="mx-auto max-w-6xl">
+          <h1 className="mb-8 text-4xl font-bold text-green-900">
+            Birds Near You
+          </h1>
+          <div className="text-center py-16">
+            <p className="text-xl text-gray-600">Loading nearby birds...</p>
+          </div>
+        </div>
+      </main>
+    }>
+      <NearbyContent />
+    </Suspense>
   );
 }
