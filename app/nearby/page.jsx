@@ -51,7 +51,7 @@ function NearbyContent() {
     return (
       <main className="min-h-screen bg-white px-6 py-10">
         <div className="mx-auto max-w-6xl">
-          <h1 className="mb-8 text-4xl font-bold text-green-900">
+          <h1 className="mb-8 text-4xl font-bold text-indigo-950">
             Birds Near You
           </h1>
           <div className="text-center py-16">
@@ -66,14 +66,14 @@ function NearbyContent() {
     return (
       <main className="min-h-screen bg-white px-6 py-10">
         <div className="mx-auto max-w-6xl">
-          <h1 className="mb-8 text-4xl font-bold text-green-900">
+          <h1 className="mb-8 text-4xl font-bold text-indigo-950">
             Birds Near You
           </h1>
           <div className="text-center py-16">
             <p className="text-xl text-red-600 mb-4">Error: {error}</p>
             <Link
               href="/"
-              className="inline-block rounded-full bg-green-700 px-6 py-3 text-white hover:bg-green-800"
+              className="inline-block rounded-full bg-indigo-700 px-6 py-3 text-white hover:bg-indigo-800"
             >
               Go Home
             </Link>
@@ -87,10 +87,10 @@ function NearbyContent() {
     <main className="min-h-screen bg-white px-6 py-10">
       <div className="mx-auto max-w-6xl">
         <div className="mb-8">
-          <Link href="/" className="text-green-700 font-semibold hover:underline">
+          <Link href="/" className="text-indigo-700 font-semibold hover:underline">
             ← Back to Home
           </Link>
-          <h1 className="mt-4 text-4xl font-bold text-green-900">
+          <h1 className="mt-4 text-4xl font-bold text-indigo-950">
             Birds Near You
           </h1>
           <p className="mt-2 text-gray-600">
@@ -117,7 +117,7 @@ function NearbyContent() {
                   className="h-56 w-full object-cover"
                 />
                 <div className="p-5">
-                  <h2 className="text-2xl font-bold text-green-900">{bird.name}</h2>
+                  <h2 className="text-2xl font-bold text-indigo-950">{bird.name}</h2>
                   <p className="italic text-gray-500">{bird.scientificName}</p>
                   
                   <div className="mt-3 space-y-1 text-sm text-gray-700">
@@ -150,7 +150,7 @@ export default function NearbyPage() {
     <Suspense fallback={
       <main className="min-h-screen bg-white px-6 py-10">
         <div className="mx-auto max-w-6xl">
-          <h1 className="mb-8 text-4xl font-bold text-green-900">
+          <h1 className="mb-8 text-4xl font-bold text-indigo-950">
             Birds Near You
           </h1>
           <div className="text-center py-16">

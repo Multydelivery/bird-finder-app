@@ -19,7 +19,7 @@ export default function BirdsPage() {
 
   return (
     <main className="min-h-screen bg-white px-6 py-10">
-      <h1 className="mb-8 text-4xl font-bold text-green-900">
+      <h1 className="mb-8 text-4xl font-bold text-indigo-950">
         Bird Library
       </h1>
 

@@ -40,7 +40,7 @@ export default function FindNearbyButton() {
       <button
         onClick={handleFindNearby}
         disabled={loading}
-        className="inline-flex items-center gap-2 rounded-full bg-green-700 px-6 py-3 text-white font-semibold hover:bg-green-800 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+        className="inline-flex items-center gap-2 rounded-full bg-indigo-700 px-6 py-3 text-white font-semibold hover:bg-indigo-800 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
       >
         {loading ? (
           <>
