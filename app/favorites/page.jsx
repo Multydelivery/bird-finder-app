@@ -36,10 +36,10 @@ export default function FavoritesPage() {
     <main className="min-h-screen bg-white px-6 py-10">
       <div className="mx-auto max-w-7xl">
         <div className="mb-8">
-          <Link href="/" className="text-green-700 font-semibold hover:underline">
+          <Link href="/" className="text-indigo-700 font-semibold hover:underline">
             ← Back to Home
           </Link>
-          <h1 className="mt-4 text-4xl font-bold text-green-900">
+          <h1 className="mt-4 text-4xl font-bold text-indigo-950">
             ❤️ My Favorite Birds
           </h1>
           <p className="mt-2 text-gray-600">
@@ -57,7 +57,7 @@ export default function FavoritesPage() {
             </p>
             <Link
               href="/"
-              className="inline-block rounded-full bg-green-700 px-6 py-3 text-white hover:bg-green-800 transition-colors"
+              className="inline-block rounded-full bg-indigo-700 px-6 py-3 text-white hover:bg-indigo-800 transition-colors"
             >
               Discover Birds
             </Link>

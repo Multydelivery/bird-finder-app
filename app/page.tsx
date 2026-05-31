@@ -130,11 +130,11 @@ export default function Home() {
   });
 
   return (
-    <main className="min-h-screen bg-green-50 px-6 py-10">
+    <main className="min-h-screen bg-sky-50 px-6 py-10">
       <section className="mx-auto max-w-7xl">
         {/* Header Section */}
         <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold text-green-900">
+          <h1 className="text-5xl font-bold text-indigo-950">
             🦜 Discover Birds Near You
           </h1>
 
@@ -147,7 +147,7 @@ export default function Home() {
             
             <Link
               href="/birds"
-              className="inline-block rounded-full bg-green-700 px-6 py-3 text-white hover:bg-green-800 transition-colors"
+              className="inline-block rounded-full bg-indigo-700 px-6 py-3 text-white hover:bg-indigo-800 transition-colors"
             >
               Browse All Birds
             </Link>
@@ -162,7 +162,7 @@ export default function Home() {
         {/* Loading State */}
         {loading && (
           <div className="text-center py-20">
-            <div className="inline-block animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-green-700"></div>
+            <div className="inline-block animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-indigo-700"></div>
             <p className="mt-4 text-xl text-gray-600">
               Finding birds in your area...
             </p>
@@ -181,7 +181,7 @@ export default function Home() {
             </p>
             <button
               onClick={() => window.location.reload()}
-              className="rounded-full bg-green-700 px-6 py-3 text-white hover:bg-green-800 transition-colors"
+              className="rounded-full bg-indigo-700 px-6 py-3 text-white hover:bg-indigo-800 transition-colors"
             >
               Try Again
             </button>
@@ -195,7 +195,7 @@ export default function Home() {
             {birds.length > 0 && (
               <div className="mb-6 text-center">
                 <p className="text-gray-700">
-                  <span className="font-bold text-green-700 text-lg">{filteredBirds.length}</span>
+                  <span className="font-bold text-indigo-700 text-lg">{filteredBirds.length}</span>
                   {searchTerm && filteredBirds.length !== birds.length && (
                     <span> of {birds.length}</span>
                   )}
@@ -212,7 +212,7 @@ export default function Home() {
                 </p>
                 <button
                   onClick={() => setSearchTerm("")}
-                  className="mt-4 text-green-700 hover:underline font-semibold"
+                  className="mt-4 text-indigo-700 hover:underline font-semibold"
                 >
                   Clear search
                 </button>

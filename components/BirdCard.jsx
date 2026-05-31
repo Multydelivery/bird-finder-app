@@ -60,7 +60,7 @@ export default function BirdCard({ bird }) {
         
         {/* Observation Badge */}
         {bird.howMany && bird.howMany > 1 && (
-          <div className="absolute top-3 right-3 bg-green-700 text-white px-3 py-1 rounded-full text-sm font-semibold">
+          <div className="absolute top-3 right-3 bg-indigo-700 text-white px-3 py-1 rounded-full text-sm font-semibold">
             {bird.howMany} spotted
           </div>
         )}
@@ -70,7 +70,7 @@ export default function BirdCard({ bird }) {
       <div className="p-5">
         <div className="flex items-start justify-between">
           <div className="flex-1">
-            <h2 className="text-2xl font-bold text-green-900">{bird.name}</h2>
+            <h2 className="text-2xl font-bold text-indigo-950">{bird.name}</h2>
             <p className="italic text-gray-500 text-sm">{bird.scientificName}</p>
             <p className="mt-2 text-gray-700 text-sm">📍 {bird.location}</p>
             {bird.dateObserved && (
@@ -94,7 +94,7 @@ export default function BirdCard({ bird }) {
         <div className="mt-4 flex gap-2">
           <Link
             href={`/birds/${bird.id}`}
-            className="flex-1 text-center rounded-full bg-green-700 px-4 py-2 text-white text-sm font-semibold hover:bg-green-800 transition-colors"
+            className="flex-1 text-center rounded-full bg-indigo-700 px-4 py-2 text-white text-sm font-semibold hover:bg-indigo-800 transition-colors"
           >
             View Details →
           </Link>

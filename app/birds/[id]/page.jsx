@@ -71,7 +71,7 @@ export default function BirdDetailPage({ params }) {
             </p>
             <Link 
               href="/" 
-              className="inline-block rounded-full bg-green-700 px-6 py-3 text-white hover:bg-green-800 transition-colors"
+              className="inline-block rounded-full bg-indigo-700 px-6 py-3 text-white hover:bg-indigo-800 transition-colors"
             >
               ← Back to Home
             </Link>
@@ -84,13 +84,13 @@ export default function BirdDetailPage({ params }) {
   const favorite = isFavorite(bird.id);
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-green-50 to-white px-6 py-10">
+    <main className="min-h-screen bg-gradient-to-b from-sky-50 to-white px-6 py-10">
       <div className="mx-auto max-w-5xl">
         {/* Navigation */}
         <div className="mb-6">
           <Link 
             href="/" 
-            className="inline-flex items-center text-green-700 font-semibold hover:underline"
+            className="inline-flex items-center text-indigo-700 font-semibold hover:underline"
           >
             ← Back to Birds
           </Link>
@@ -117,7 +117,7 @@ export default function BirdDetailPage({ params }) {
 
             {/* Count Badge */}
             {bird.howMany && bird.howMany > 1 && (
-              <div className="absolute top-6 left-6 bg-green-700 text-white px-4 py-2 rounded-full font-semibold shadow-lg">
+              <div className="absolute top-6 left-6 bg-indigo-700 text-white px-4 py-2 rounded-full font-semibold shadow-lg">
                 {bird.howMany} birds spotted
               </div>
             )}
@@ -127,7 +127,7 @@ export default function BirdDetailPage({ params }) {
           <div className="p-8 md:p-12">
             {/* Header */}
             <div className="border-b border-gray-200 pb-6">
-              <h1 className="text-4xl md:text-5xl font-bold text-green-900 mb-3">
+              <h1 className="text-4xl md:text-5xl font-bold text-indigo-950 mb-3">
                 {bird.name}
               </h1>
               <p className="text-xl md:text-2xl italic text-gray-500 mb-4">
@@ -198,8 +198,8 @@ export default function BirdDetailPage({ params }) {
             {/* Information Grid */}
             <div className="mt-8 grid gap-6 md:grid-cols-2">
               {/* Observation Details */}
-              <div className="bg-green-50 rounded-2xl p-6 border-2 border-green-200">
-                <h2 className="text-2xl font-bold text-green-900 mb-4 flex items-center gap-2">
+              <div className="bg-sky-50 rounded-2xl p-6 border-2 border-sky-200">
+                <h2 className="text-2xl font-bold text-indigo-950 mb-4 flex items-center gap-2">
                   🔍 Observation Details
                 </h2>
                 <div className="space-y-3 text-gray-700">
@@ -220,7 +220,7 @@ export default function BirdDetailPage({ params }) {
                   {bird.obsReviewed !== undefined && (
                     <div className="flex justify-between">
                       <span className="font-medium">Verified:</span>
-                      <span className={bird.obsReviewed ? "text-green-600" : "text-yellow-600"}>
+                      <span className={bird.obsReviewed ? "text-sky-700" : "text-yellow-600"}>
                         {bird.obsReviewed ? "✓ Yes" : "⏳ Pending"}
                       </span>
                     </div>
@@ -229,7 +229,7 @@ export default function BirdDetailPage({ params }) {
                   {bird.locationPrivate !== undefined && (
                     <div className="flex justify-between">
                       <span className="font-medium">Location Privacy:</span>
-                      <span className={bird.locationPrivate ? "text-orange-600" : "text-green-600"}>
+                      <span className={bird.locationPrivate ? "text-orange-600" : "text-sky-700"}>
                         {bird.locationPrivate ? "🔒 Private" : "🌍 Public"}
                       </span>
                     </div>
@@ -286,7 +286,7 @@ export default function BirdDetailPage({ params }) {
                   href={`https://ebird.org/species/${bird.speciesCode || bird.id}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 bg-green-700 text-white px-6 py-3 rounded-full hover:bg-green-800 transition-colors font-semibold"
+                  className="inline-flex items-center gap-2 bg-indigo-700 text-white px-6 py-3 rounded-full hover:bg-indigo-800 transition-colors font-semibold"
                 >
                   🦜 View on eBird
                 </a>
